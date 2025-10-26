@@ -1,0 +1,69 @@
+.meals-selection {
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+.meals-selection h2 {
+  margin-bottom: 2rem;
+  color: #343a40;
+}
+
+.people-input {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.people-input label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #495057;
+}
+
+.people-input input {
+  padding: 0.5rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 200px;
+}
+
+.meals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.meal-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.meal-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.meal-name {
+  font-weight: bold;
+  color: #495057;
+}
+
+.price {
+  color: #28a745;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.meal-subtotal {
+  color: #6c757d;
+  font-size: 0.9rem;
+}

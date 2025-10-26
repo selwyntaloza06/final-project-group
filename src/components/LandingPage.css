@@ -5,15 +5,20 @@
   background-size: cover;
   background-position: center;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   color: white;
-  text-align: center;
 }
 
 .landing-content {
-  max-width: 800px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .landing-page h1 {
@@ -27,8 +32,23 @@
   font-weight: normal;
 }
 
+.get-started-btn {
+  background-color: #007bff;
+  color: white;
+  font-size: 18px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 3rem;
+}
+
+.get-started-btn:hover {
+  background-color: #0056b3;
+}
+
 .company-info {
-  margin-top: 3rem;
   text-align: left;
   background: rgba(255, 255, 255, 0.9);
   padding: 2rem;

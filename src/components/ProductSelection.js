@@ -11,6 +11,10 @@ const ProductSelection = () => {
     <div className="product-selection">
       <Navigation />
       <div className="sections-container">
+        <div className="page-header">
+          <h1>Conference Planning</h1>
+          <p>Select your rooms, add-ons, and meals for your event</p>
+        </div>
         <RoomSelection />
         <AddOnsSelection />
         <MealsSelection />

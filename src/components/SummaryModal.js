@@ -1,10 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { toggleModal } from "../store/slices/summarySlice";
+import Navigation from "./Navigation";
 import "./SummaryModal.css";
 
-const SummaryModal = () => {
-  const { isModalOpen } = useSelector((state) => state.summary);
+const SummaryPage = () => {
   const { rooms, totalCost: roomTotal } = useSelector((state) => state.rooms);
   const { addons, totalCost: addonsTotal } = useSelector(
     (state) => state.addons
@@ -15,8 +16,7 @@ const SummaryModal = () => {
     totalCost: mealsTotal,
   } = useSelector((state) => state.meals);
   const dispatch = useDispatch();
-
-  if (!isModalOpen) return null;
+  const navigate = useNavigate();
 
   const grandTotal = roomTotal + addonsTotal + mealsTotal;
 
@@ -31,6 +31,7 @@ const SummaryModal = () => {
           unitCost: room.price,
           quantity: room.quantity,
           totalCost: room.price * room.quantity,
+          type: "room",
         });
       }
     });
@@ -43,6 +44,7 @@ const SummaryModal = () => {
           unitCost: addon.price,
           quantity: addon.quantity,
           totalCost: addon.price * addon.quantity,
+          type: "addon",
         });
       }
     });
@@ -55,6 +57,7 @@ const SummaryModal = () => {
           unitCost: meal.price,
           quantity: `For ${numberOfPeople} people`,
           totalCost: meal.price * numberOfPeople,
+          type: "meal",
         });
       }
     });
@@ -65,14 +68,18 @@ const SummaryModal = () => {
   const summaryData = getSummaryData();
 
   return (
-    <div className="modal-overlay" onClick={() => dispatch(toggleModal())}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
+    <div className="summary-page">
+      <Navigation />
+
+      <div className="page-header">
+        <h1>Event Summary</h1>
+        <p>Review your conference selections and total cost</p>
+      </div>
+
+      <div className="summary-content">
+        <div className="grand-total-section">
           <h2>TOTAL COST FOR THE EVENT</h2>
-          <h1 className="grand-total">${grandTotal}</h1>
-          <button className="close-btn" onClick={() => dispatch(toggleModal())}>
-            ×
-          </button>
+          <h1 className="grand-total">${grandTotal.toLocaleString()}</h1>
         </div>
 
         <table className="summary-table">
@@ -88,16 +95,41 @@ const SummaryModal = () => {
             {summaryData.map((item, index) => (
               <tr key={index}>
                 <td>{item.name}</td>
-                <td>${item.unitCost}</td>
+                <td>${item.unitCost.toLocaleString()}</td>
                 <td>{item.quantity}</td>
-                <td>${item.totalCost}</td>
+                <td>${item.totalCost.toLocaleString()}</td>
               </tr>
             ))}
           </tbody>
         </table>
+
+        {summaryData.length === 0 && (
+          <div className="empty-summary">
+            <p>
+              No items selected yet. Start by choosing rooms for your event.
+            </p>
+          </div>
+        )}
+      </div>
+
+      <div className="page-footer">
+        <div className="navigation-buttons">
+          <button
+            className="nav-btn back-btn"
+            onClick={() => navigate("/meals")}
+          >
+            Back to Meals
+          </button>
+          <button
+            className="nav-btn primary-btn"
+            onClick={() => alert("Thank you for your conference planning!")}
+          >
+            Complete Booking
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default SummaryModal;
+export default SummaryPage;
